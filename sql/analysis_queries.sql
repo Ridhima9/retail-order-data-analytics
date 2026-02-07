@@ -1,6 +1,4 @@
-/* ============================================================
-   Retail Order Data Analytics – Business SQL Queries
-   ============================================================ */
+/*Retail Order Data Analytics – Business SQL Queries */
 
 /* 1. Top 10 highest revenue-generating products */
 SELECT
