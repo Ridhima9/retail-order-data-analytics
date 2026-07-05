@@ -1,90 +1,276 @@
-Retail Order Data Analytics — ETL Pipeline & Business Analysis
-Built to answer one question: Which products, regions, and categories are actually driving revenue — and how has that changed over time?
+# 🛍️ Retail Order Data Analytics
+### End-to-End ETL Pipeline & Business Intelligence using Python, SQL and MySQL
 
-Business Problem
-A retail business with 9,994 orders across Furniture, Office Supplies, and Technology categories had raw transactional data sitting in CSV files with no structure for analysis. There was no way to compare performance across regions, track month-over-month growth, or identify which sub-categories were gaining or losing revenue year over year.
+An end-to-end retail analytics project that transforms raw transactional data into a structured SQL database and answers key business questions through SQL-based analysis.
 
-This project built a full pipeline — from raw CSV to a clean MySQL database — and answered five core business questions using SQL.
+> **Business Question**
+>
+> *Which products, regions, and categories are driving revenue, and how has their performance changed over time?*
 
-What Was Built
-An end-to-end ETL pipeline that ingests raw retail order data, engineers profitability metrics, validates data quality, and loads it into MySQL for business analysis.
+---
 
-Stage	Tool	Output
-Data Ingestion	Python (Kaggle API)	Raw orders CSV extracted and loaded
-Data Cleaning	Python (Pandas)	Standardized columns, handled nulls, parsed dates
-Feature Engineering	Python	Derived discount amount, sale price, and profit per order
-Data Validation	Python (assertions)	Rule-based checks before database load
-Database Load	SQLAlchemy + MySQL	Clean dataset loaded into orders table
-Business Analysis	SQL (MySQL)	5 analytical queries with revenue and growth insights
-Project Structure
+# 📌 Overview
+
+Retail businesses generate thousands of transactions every day, but raw CSV files are difficult to analyze directly.
+
+This project builds a complete ETL pipeline that:
+
+- Extracts retail order data
+- Cleans and validates the dataset
+- Engineers business metrics
+- Loads the data into MySQL
+- Performs SQL-based business analysis
+
+The final output enables decision-making through revenue trends, regional performance, and product-level insights.
+
+---
+
+# 🚀 Project Architecture
+
+```
+Raw CSV
+    │
+    ▼
+Data Ingestion (Kaggle API)
+    │
+    ▼
+Data Cleaning (Pandas)
+    │
+    ▼
+Feature Engineering
+    │
+    ▼
+Data Validation
+    │
+    ▼
+MySQL Database
+    │
+    ▼
+SQL Business Analysis
+```
+
+---
+
+# 📂 Project Structure
+
+```
 retail-order-data-analytics/
 │
 ├── notebooks/
-│   └── 01_data_preprocessing.ipynb     # Full ETL pipeline
+│   └── 01_data_preprocessing.ipynb
 │
 ├── sql/
-│   └── analysis_queries.sql            # 5 business SQL queries
+│   └── analysis_queries.sql
 │
-├── .gitignore
-└── README.md
-Dataset
-Source: Retail Orders Dataset — Kaggle (ankitbansal06/retail-orders)
-Size: 9,994 orders, 16 raw columns
-Coverage: US retail orders across 2022–2023
-Categories: Furniture, Office Supplies, Technology
-Regions: South, West, East, Central
-ETL Pipeline
-1. Data Ingestion Downloaded directly from Kaggle using the API. Non-standard nulls (Not Available, unknown) were handled at load time.
+├── README.md
+└── .gitignore
+```
 
-2. Data Cleaning Column names standardized to lowercase snake_case. Missing ship mode values filled. Order dates converted to datetime format.
+---
 
-3. Feature Engineering Three profitability columns derived from existing fields:
+# 📊 Dataset
 
-Feature	Logic
-discount	list_price × discount_percent × 0.01
-sale_price	list_price − discount
-profit	sale_price − cost_price
-4. Data Validation Four assertion checks before database load:
+**Source:** Kaggle Retail Orders Dataset
 
-Order IDs are unique
-Sale prices are non-negative
-Discounts are non-negative
-No null values remain
-All checks passed.
+- **Orders:** 9,994
+- **Years:** 2022–2023
+- **Categories:** Furniture, Office Supplies, Technology
+- **Regions:** East, West, South, Central
+- **Raw Features:** 16
 
-5. Database Load Cleaned dataset loaded into MySQL using SQLAlchemy with environment variables for credentials — no hardcoded passwords.
+---
 
-SQL Business Queries
-Query	Business Question
-Q1	Which 10 products generate the highest total revenue?
-Q2	Which 5 products sell the most in each region?
-Q3	How do monthly sales in 2022 compare to 2023?
-Q4	Which month had the highest sales for each product category?
-Q5	Which sub-category grew the most from 2022 to 2023?
-All queries are in sql/analysis_queries.sql.
+# ⚙️ ETL Pipeline
 
-Tech Stack
-Python — Pandas, SQLAlchemy, PyMySQL
-MySQL
-Jupyter Notebook
-Kaggle API
-How to Run
-Python — ETL Pipeline
+## 1️⃣ Data Ingestion
 
-pip install pandas sqlalchemy pymysql kaggle
-jupyter notebook notebooks/01_data_preprocessing.ipynb
-Environment Variables (required before running)
+- Downloaded dataset using Kaggle API
+- Imported into Python
+- Parsed CSV into Pandas DataFrame
 
-# Windows
+---
+
+## 2️⃣ Data Cleaning
+
+Performed preprocessing including:
+
+- Standardized column names
+- Parsed date columns
+- Removed inconsistencies
+- Filled missing values
+- Corrected invalid entries
+
+---
+
+## 3️⃣ Feature Engineering
+
+Created new business metrics including:
+
+| Feature | Formula |
+|----------|----------|
+| Discount Amount | List Price × Discount % |
+| Sale Price | List Price − Discount |
+| Profit | Sale Price − Cost Price |
+
+---
+
+## 4️⃣ Data Validation
+
+Validated the processed dataset before database loading.
+
+Checks performed:
+
+- ✅ Unique Order IDs
+- ✅ No null values
+- ✅ Non-negative prices
+- ✅ Non-negative discounts
+
+---
+
+## 5️⃣ Database Loading
+
+Loaded the cleaned dataset into **MySQL** using SQLAlchemy.
+
+Database credentials are managed securely using environment variables.
+
+---
+
+# 📈 Business Analysis
+
+The project answers five business questions.
+
+### Q1
+
+Top 10 revenue-generating products.
+
+### Q2
+
+Top 5 selling products in each region.
+
+### Q3
+
+Monthly sales comparison between 2022 and 2023.
+
+### Q4
+
+Highest sales month for every product category.
+
+### Q5
+
+Fastest-growing product sub-categories year-over-year.
+
+---
+
+# 🛠 Tech Stack
+
+| Category | Tools |
+|----------|-------|
+| Programming | Python |
+| Data Processing | Pandas |
+| Database | MySQL |
+| ORM | SQLAlchemy |
+| SQL | MySQL |
+| Environment | Jupyter Notebook |
+| Dataset | Kaggle API |
+
+---
+
+# 📊 Key Outcomes
+
+- Built an end-to-end ETL pipeline
+- Processed nearly **10,000 retail orders**
+- Engineered profitability metrics
+- Designed a structured MySQL database
+- Solved five real-world business analytics problems using SQL
+- Improved data quality through automated validation
+
+---
+
+# ▶️ How to Run
+
+## Clone Repository
+
+```bash
+git clone https://github.com/Ridhima9/retail-order-data-analytics.git
+cd retail-order-data-analytics
+```
+
+---
+
+## Install Dependencies
+
+```bash
+pip install pandas sqlalchemy pymysql kaggle notebook
+```
+
+---
+
+## Configure Environment Variables
+
+### Windows
+
+```cmd
 set DB_USER=your_username
 set DB_PASSWORD=your_password
+```
 
-# Mac/Linux
+### Linux / macOS
+
+```bash
 export DB_USER=your_username
 export DB_PASSWORD=your_password
-SQL Queries
+```
 
+---
+
+## Run Notebook
+
+```
+notebooks/01_data_preprocessing.ipynb
+```
+
+---
+
+## Execute SQL Queries
+
+```sql
 USE retail_sales;
--- Run sql/analysis_queries.sql
-Security
-Database credentials are managed through environment variables — nothing sensitive is hardcoded in the notebook or committed to the repository.
+```
+
+Run
+
+```
+sql/analysis_queries.sql
+```
+
+---
+
+# 🔒 Security
+
+- Database credentials stored using environment variables
+- No secrets committed to the repository
+- `.gitignore` excludes sensitive files
+
+---
+
+# 📌 Future Improvements
+
+- Interactive Power BI Dashboard
+- Automated ETL Scheduling
+- Dockerized Deployment
+- Data Quality Reports
+- Sales Forecasting using Machine Learning
+
+---
+
+# 👩‍💻 Author
+
+**Ridhima Singh**
+
+Integrated M.Sc. Mathematics & Computing  
+Birla Institute of Technology, Mesra
+
+📧 ridhima5430@gmail.com
+
+🔗 LinkedIn: https://linkedin.com/in/ridhima-singh-42bb39303
+
